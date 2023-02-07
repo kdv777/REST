@@ -3,7 +3,8 @@ import axios from 'axios';
 import logo from './logo.svg';
 import './App.css';
 import Custom_users_list from './components/custom_users.js';
-
+import Footer from './components/Footer.js';
+import Menu from './components/Menu.js';
 
 class App extends React.Component {
     constructor(props) {
@@ -41,8 +42,15 @@ class App extends React.Component {
     render () {
         return (
             <div>
+                <Menu/>
                 <Custom_users_list custom_users={this.state.custom_users}/>
+                <Footer/>
             </div>
+//            вызов меню
+//            вызов футера
+//            <div>
+//                <Footer footer={this.state.footer}/>
+//            </div>
         )
         }
     }
