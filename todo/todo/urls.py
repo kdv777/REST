@@ -20,11 +20,14 @@ from users.views import CustomUserModelViewSet
 from todos.views import TODOModelViewSet, ProjectModelViewSet, UserModelViewSet
 
 router = DefaultRouter()
+# router.register('users', CustomUserModelViewSet)
 router.register('users', CustomUserModelViewSet)
 router.register('user_set', UserModelViewSet)
 router.register('TODO', TODOModelViewSet)
 router.register('Project', ProjectModelViewSet)
 
+# Filter
+# router.register('todo_f', TODOModelViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

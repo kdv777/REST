@@ -17,9 +17,10 @@ class User(models.Model):
 class TODO(models.Model):
     title = models.CharField(max_length=250)
     body = models.TextField()
-    date = models.DateField()
-    author = models.OneToOneField(User, on_delete=models.CASCADE)
-    active = models.BooleanField()
+    date = models.DateTimeField(auto_now_add=True)
+    update = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.PROTECT)
+    active = models.BooleanField(default=True)
 
 
     def __str__(self):
