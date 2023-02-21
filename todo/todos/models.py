@@ -7,6 +7,7 @@ class Project(models.Model):
 
 
 class User(models.Model):
+    objects = None
     project = models.OneToOneField(Project, related_name='user_set',
                                    on_delete=models.CASCADE)
     first_name = models.CharField(max_length=32)

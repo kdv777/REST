@@ -3,9 +3,8 @@ from rest_framework.generics import UpdateAPIView, ListAPIView
 from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
 from rest_framework.renderers import JSONRenderer, AdminRenderer, BrowsableAPIRenderer
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
-
-# from .models import CustomUser
-# from .serializers import CustomUserModelSerializer
+from rest_framework.permissions import BasePermission
+from django.contrib.auth.hashers import make_password
 
 from todos.models import TODO, Project, User
 from todos.serializers import TODOModelSerializer, ProjectModelSerializer, UserModelSerializer
@@ -14,6 +13,12 @@ from users.serializers import CustomUserModelSerializer
 
 from todo.filters import ProjectFilter
 
+
+
+
+class StaffOnly(BasePermission):
+    def has_permission(self, request, view):
+        return request.user.is_staff
 
 class CustomUserModelViewSet(ModelViewSet):
     queryset = CustomUser.objects.all()
