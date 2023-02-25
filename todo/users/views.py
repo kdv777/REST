@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, mixins
 from rest_framework.generics import UpdateAPIView, ListAPIView
 from rest_framework.mixins import ListModelMixin, CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
 from rest_framework.renderers import JSONRenderer, AdminRenderer, BrowsableAPIRenderer
@@ -7,7 +7,7 @@ from rest_framework.permissions import BasePermission
 from django.contrib.auth.hashers import make_password
 
 from todos.models import TODO, Project, User
-from todos.serializers import TODOModelSerializer, ProjectModelSerializer, UserModelSerializer
+from todos.serializers import TODOModelSerializer, ProjectModelSerializer, UserModelSerializer, UserSerializer
 from users.models import CustomUser
 from users.serializers import CustomUserModelSerializer
 
@@ -63,3 +63,11 @@ class CustomUserModelViewSet(ListModelMixin, RetrieveModelMixin, UpdateAPIView, 
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserModelSerializer
     renderer_classes = [JSONRenderer, BrowsableAPIRenderer]
+
+
+class UserViewSet(mixins.ListModelMixin,
+                  mixins.RetrieveModelMixin,
+                  mixins.UpdateModelMixin,
+                  viewsets.GenericViewSet):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()

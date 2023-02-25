@@ -21,7 +21,6 @@ from users.views import CustomUserModelViewSet
 from todos.views import TODOModelViewSet, ProjectModelViewSet, UserModelViewSet
 
 router = DefaultRouter()
-# router.register('users', CustomUserModelViewSet)
 router.register('users', CustomUserModelViewSet)
 router.register('user_set', UserModelViewSet)
 router.register('TODO', TODOModelViewSet)

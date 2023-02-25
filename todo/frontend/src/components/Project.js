@@ -1,17 +1,17 @@
 import React from 'react'
 
 
-const ProjectItem = ({project}) => {
+const ProjectItem = ({item}) => {
     return (
         <tr>
-            <td>{project.id}</td>
-            <td>{project.name}</td>
-            <td>{project.repo_link}</td>
+            <td>{item.id}</td>
+            <td>{item.name}</td>
+            <td>{item.repo_link}</td>
         </tr>
     )
 }
 
-const ProjectList = ({projects}) => {
+const ProjectList = ({items}) => {
     return (
         <table>
             <tr>
@@ -19,7 +19,7 @@ const ProjectList = ({projects}) => {
                 <th>NAME</th>
                 <th>REPO_LINK</th>
             </tr>
-            {projects.map((project) => <ProjectItem project={project} />)}
+            {items.map((item) => <ProjectItem item={item} />)}
         </table>
     )
 }

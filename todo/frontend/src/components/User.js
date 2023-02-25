@@ -1,29 +1,27 @@
 import React from 'react'
 
 
-const UserItem = ({user}) => {
+const UserItem = ({user_set}) => {
     return (
         <tr>
-            <td>{user.id}</td>
-            <td>{user.first_name}</td>
-            <td>{user.last_name}</td>
-            <td>{user.email}</td>
-            <td>{user.project}</td>
+            <td>{user_set.active}</td>
+            <td>{user_set.first_name}</td>
+            <td>{user_set.last_name}</td>
+            <td>{user_set.email}</td>
         </tr>
     )
 }
 
-const UserList = ({users}) => {
+const UserList = ({user_sets}) => {
     return (
         <table>
             <tr>
-                <th>ID</th>
-                <th>FIRST_NAME</th>
-                <th>LAST_NAME</th>
-                <th>EMAIL</th>
-                <th>PROJECT</th>
+                <th>active</th>
+                <th>first_name</th>
+                <th>last_name</th>
+                <th>email</th>
             </tr>
-            {users.map((user) => <UserItem user={user} />)}
+            {user_sets.map((user_set) => <UserItem user_set={user_set} />)}
         </table>
     )
 }

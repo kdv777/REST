@@ -4,7 +4,7 @@ import React from 'react'
 const ToDoItem = ({item}) => {
     return (
         <tr>
-            <td>{item.id}</td>
+            <td>{item.active}</td>
             <td>{item.title}</td>
             <td>{item.body}</td>
             <td>{item.author}</td>
@@ -16,7 +16,7 @@ const ToDoList = ({items}) => {
     return (
         <table>
             <tr>
-                <th>ID</th>
+                <th>ACTIVE</th>
                 <th>TITLE</th>
                 <th>BODY</th>
                 <th>AUTHOR</th>

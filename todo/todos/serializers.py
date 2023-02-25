@@ -4,6 +4,8 @@ from django.contrib.auth.hashers import make_password
 from todos.models import TODO, Project, User
 from users.models import CustomUser
 
+from rest_framework import serializers
+
 
 # class UserSerializer(ModelSerializer):
 #     class Meta:
@@ -20,6 +22,19 @@ from users.models import CustomUser
 #         )
 #         user.save()
 #         return user
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
+
+
+class ToDoSerializer(serializers.ModelSerializer):
+    author = UserSerializer()
+
+    class Meta:
+        model = TODO
+        fields = '__all__'
 
 
 class TODOModelSerializer(ModelSerializer):
