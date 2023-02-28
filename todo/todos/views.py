@@ -16,7 +16,12 @@ class StaffOnly(BasePermission):
 class TODOModelViewSet(ModelViewSet):
     queryset = TODO.objects.all()
     serializer_class = TODOModelSerializer
-    filterset_fields = ['title']
+    # filterset_fields = ['title']
+
+    def get_serializer_class(self):
+        if self.request.method in ['GET']:
+            return TODOModelSerializer
+        return TODOModelSerializer
 
 
 class ProjectModelViewSet(ModelViewSet):

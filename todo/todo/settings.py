@@ -133,6 +133,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
 AUTH_USER_MODEL = "users.CustomUser"
 

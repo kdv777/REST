@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, UserManager
 
 
 class Project(models.Model):
@@ -13,6 +14,8 @@ class User(models.Model):
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
     email = models.EmailField()
+
+
 
 
 class TODO(models.Model):

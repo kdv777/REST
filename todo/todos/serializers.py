@@ -37,6 +37,12 @@ class ToDoSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ToDoSerializerBase(serializers.ModelSerializer):
+    class Meta:
+        model = TODO
+        fields = '__all__'
+
+
 class TODOModelSerializer(ModelSerializer):
     class Meta:
         model = TODO
