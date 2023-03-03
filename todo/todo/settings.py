@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'todos',
     'django_filters',
     'rest_framework.authtoken',
+    'userapp',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -136,6 +138,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # from rest_framework.permissions import DjangoModelPermissionsOrAnonReadOnly
 
 AUTH_USER_MODEL = "users.CustomUser"
+# AUTH_USER_MODEL = "userapp.User"
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -155,4 +158,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 2,
+
+    'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+
 }
