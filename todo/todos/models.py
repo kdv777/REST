@@ -16,8 +16,6 @@ class User(models.Model):
     email = models.EmailField()
 
 
-
-
 class TODO(models.Model):
     title = models.CharField(max_length=250)
     body = models.TextField()
@@ -26,7 +24,5 @@ class TODO(models.Model):
     author = models.ForeignKey(User, on_delete=models.PROTECT)
     active = models.BooleanField(default=True)
 
-
     def __str__(self):
         return self.title
-
