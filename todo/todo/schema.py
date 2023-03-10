@@ -13,7 +13,7 @@ class Query(graphene.ObjectType):
     all_todo = graphene.List(TODOType)
 
     def resolve_all_todo(self, info):
-        return TODO.object.all()
+        return TODO.objects.all()
 
 
 class UserType(DjangoObjectType):
