@@ -5,6 +5,7 @@ import ProjectList from './components/Project.js'
 import {BrowserRouter, Route, Switch, Redirect, Link} from 'react-router-dom'
 import axios from 'axios'
 import LoginForm from './components/Auth.js'
+import TodoForm from './components/TodoForm.js'
 import Cookies from 'universal-cookie';
 
 
@@ -22,8 +23,10 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            'user_sets': [],
-            'TODO': []
+            users: [],
+            user_sets: [],
+            user_set: [],
+            TODO: []
         }
     }
 
@@ -64,17 +67,25 @@ class App extends React.Component {
         return headers
     }
 
+    deleteTodo(id) {
+        const headers = this.get_headers()
+        axios.delete(`http://127.0.0.1:8000/api/TODO/${id}`, {headers: headers})
+            .then(response => {
+                this.setState({todos: this.state.todos.filter((item) => item.id !==id)})
+        }).catch(error => console.log(error))
+    }
+
     load_data() {
 
         const headers = this.get_headers()
         axios.get('http://127.0.0.1:8000/api/user_set/', {headers})
             .then(response => {
-                this.setState({user_sets: response.data})
+                this.setState({user_set: response.data})
             }).catch(error => console.log(error))
 
         axios.get('http://127.0.0.1:8000/api/TODO/', {headers})
             .then(response => {
-                this.setState({TODO: response.data})
+                this.setState({ToDo: response.data})
             }).catch(error => console.log(error))
     }
 
@@ -86,34 +97,31 @@ class App extends React.Component {
         return (
             <div className="App">
                 <BrowserRouter>
-                <nav>
-                    <ul>
-                        <li>
-                            <Link to='/'>Users</Link>
-                        </li>
-                        <li>
-                            <Link to='/TODO'>ToDo</Link>
-                        </li>
-                        <li>
-                            {this.is_authenticated() ? <button
-                            onClick={()=>this.logout()}>Logout</button> :
-                            <Link to='/login'>Login</Link>}
-                        </li>
-                    </ul>
-                </nav>
-                <Switch>
-                    <Route exact path='/'>
-                        <UserList user_sets={this.state.user_sets} />
-                    </Route>
-                    <Route exact path='/TODO'>
-                        <ToDoList TODO={this.state.TODO}/>
-                    </Route>
-                    <Route path="/Project/:id">
-                        <ProjectList project={this.state.projects} />
-                    </Route>
-                    <Redirect from='/user_set' to='/' />
-                    <Route component={NotFound404} />
-                </Switch>
+                    <nav>
+                        <ul>
+                            <li>
+                                <Link to='/'>Users</Link>
+                            </li>
+                            <li>
+                                <Link to='/TODO'>ToDo</Link>
+                            </li>
+                            <li>
+                                {this.is_authenticated() ? <button
+                                onClick={()=>this.logout()}>Logout</button> :
+                                <Link to='/login'>Login</Link>}
+                            </li>
+                        </ul>
+                    </nav>
+                    <Switch>
+                        <Route exact path='/' component={ () => <ToDoList items={this.state.user_sets} />} />
+                        <Route exact path='/TODO' component={() => <ToDoList items={this.state.todos}
+                            deleteTodo={(id)=>this.deleteTodo(id)} />} />
+                        <Route exact path='/TODO/create' component={() => <TodoForm />} />
+                        <Route exact path='/login' component={() => <LoginForm get_token={(username, password) =>
+                            this.get_token(username, password)} />} />
+                        <Redirect from='/user_set' to='/' />
+                        <Route component={NotFound404} />
+                    </Switch>
                 </BrowserRouter>
             </div>
         )
